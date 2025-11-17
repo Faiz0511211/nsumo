@@ -20,6 +20,8 @@ CC = $(MSPGCC_BIN_DIR)/msp430-elf-gcc
 RM = rm
 DEBUG = LD_LIBRARY_PATH=$(DEBUG_DRIVERS_DIR) $(DEBUG_BIN_DIR)/mspdebug
 
+CPPCHECK = cppcheck
+
 #Files:
 TARGET = $(BIN_DIR)/blink4
 SOURCES = main.c \
@@ -45,7 +47,7 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 # Phonies
-.PHONY: all clean flash
+.PHONY: all clean flash cppcheck
 
 all: $(TARGET)
 
@@ -54,3 +56,11 @@ clean:
 
 flash: $(TARGET)
 	$(DEBUG) tilib "prog $(TARGET)"
+
+cppcheck:
+	@$(CPPCHECK) --quiet --enable=all --error-exitcode=1 \
+		--inline-suppr \
+	$(addprefix -I,$(INCLUDE_DIRS)) \
+        $(SOURCES) \
+	-i external/printf
+
