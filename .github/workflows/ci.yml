@@ -5,14 +5,7 @@ jobs:
     container:
       image: faiz0511211/msp430-gcc-9.3.1.11:latest
     steps:
-      # Step 1: Checkout the code (Fixes line 9's structural issue)
       - name: Checkout the repository
-        run: |
-          git config --global --add safe.directory "$GITHUB_WORKSPACE"
-          git checkout $GITHUB_SHA
-
-      # Step 2: Run Make (Fixes the missing space and subsequent error)
+        uses: actions/checkout@v3
       - run: make
-
-      # Step 3: Run CppCheck (Fixes the missing space)
       - run: make cppcheck
