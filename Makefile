@@ -55,12 +55,12 @@ LDFLAGS = -mmcu=$(MCU) $(addprefix -L,$(LIB_DIRS))
 
 ## Linking
 $(TARGET): $(OBJECTS)
-        @mkdir -p $(dir $@)
-        $(CC) $(LDFLAGS) $^ -o $@
+	@mkdir -p $(dir $@)
+	$(CC) $(LDFLAGS) $^ -o $@
 
 ## Compiling
 $(OBJ_DIR)/%.o: %.c
-        @mkdir -p $(dir $@)
+	@mkdir -p $(dir $@)
         $(CC) $(CFLAGS) -c -o $@ $^
 
 # --------------------------------------------------------------------------------
