@@ -21,8 +21,17 @@ endif
 # 2. Define the main compiler and system paths (These are constant for the file)
 MSPGCC_BIN_DIR = $(MSPGCC_ROOT_DIR)/bin
 MSPGCC_INCLUDE_DIR = /home/qwerty/Downloads/ccs2031/ccs/ccs_base/msp430/include_gcc
-INCLUDE_DIRS = $(MSPGCC_INCLUDE_DIR)
-LIB_DIRS = $(MSPGCC_INCLUDE_DIR)
+CONTAINER_INCLUDE_DIR := /home/ubuntu/dev/tools/msp430-gcc/msp430-gcc-9.3.1.11_linux64/include
+
+# If running in the cloud (CI), use the container's path.
+ifeq ($(GITHUB_ACTIONS),true)
+INCLUDE_DIRS := $(CONTAINER_INCLUDE_DIR)
+LIB_DIRS := $(CONTAINER_INCLUDE_DIR)
+else
+# If running locally (Host), use the local CCS path.
+INCLUDE_DIRS := $(MSPGCC_INCLUDE_DIR)
+LIB_DIRS := $(MSPGCC_INCLUDE_DIR)
+endif
 TI_CSS_DIR = /home/qwerty/Downloads/ccs2031/ccs
 DEBUG_DRIVERS_DIR = $(TI_CSS_DIR)/ccs_base/DebugServer/drivers
 
