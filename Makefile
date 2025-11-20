@@ -7,7 +7,7 @@
 # --- CONDITIONAL PATHS & TOOLCHAIN DEFINITION ---
 # GITHUB_ACTIONS is automatically set to 'true' in the cloud environment.
 MSPGCC_ROOT_DIR := /home/qwerty/Downloads/msp430-gcc-9.3.1.11_linux64
-CONTAINER_BIN_DIR := /dev/tools/msp430-gcc/bin
+CONTAINER_BIN_DIR := /home/ubuntu/dev/tools/msp430-gcc/msp430-gcc-9.3.1.11_linux64/bin
 
 # 1. Select the Compiler Path based on environment
 ifeq ($(GITHUB_ACTIONS),true)
