@@ -61,7 +61,7 @@ $(TARGET): $(OBJECTS)
 ## Compiling
 $(OBJ_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
-        $(CC) $(CFLAGS) -c -o $@ $^
+	$(CC) $(CFLAGS) -c -o $@ $^
 
 # --------------------------------------------------------------------------------
 # PHONY TARGETS (Utility Commands)
@@ -72,14 +72,14 @@ $(OBJ_DIR)/%.o: %.c
 all: $(TARGET)
 
 clean:
-        $(RM) -r $(BUILD_DIR)
+	$(RM) -r $(BUILD_DIR)
 
 flash: $(TARGET)
-        $(DEBUG) tilib "prog $(TARGET)"
+	$(DEBUG) tilib "prog $(TARGET)"
 
 cppcheck:
-        @$(CPPCHECK) --quiet --enable=all --error-exitcode=1 \
-        --inline-suppr \
-        $(addprefix -I,$(INCLUDE_DIRS)) \
+	@$(CPPCHECK) --quiet --enable=all --error-exitcode=1 \
+		--inline-suppr \
+	$(addprefix -I,$(INCLUDE_DIRS)) \
         $(SOURCES) \
         -i external/printf
