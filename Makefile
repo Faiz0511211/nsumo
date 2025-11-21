@@ -21,6 +21,7 @@ RM = rm
 DEBUG = LD_LIBRARY_PATH=$(DEBUG_DRIVERS_DIR) $(DEBUG_BIN_DIR)/mspdebug
 
 CPPCHECK = cppcheck
+FORMAT = clang-format-12
 
 #Files:
 TARGET = $(BIN_DIR)/blink4
@@ -47,7 +48,7 @@ $(OBJ_DIR)/%.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $^
 
 # Phonies
-.PHONY: all clean flash cppcheck
+.PHONY: all clean flash cppcheck format
 
 all: $(TARGET)
 
@@ -63,3 +64,6 @@ cppcheck:
         $(addprefix -I,$(INCLUDE_DIRS)) \
         $(SOURCES) \
         -i external/printf
+
+format:
+	@$(FORMAT) -i $(SOURCES)
