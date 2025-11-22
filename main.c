@@ -52,14 +52,15 @@
 
 #include <msp430.h>
 #include "led.h"
-int main(void) {
-    WDTCTL = WDTPW | WDTHOLD;   // Stop watchdog timer
-   // P1DIR |= 0x01;              // Set P1.0 (Red) AND P1.6 (Green) to output
-    //P1OUT |= 0x01;              // Turn RED ON to start
-					led_init();
-    while(1) {
-			led_toggle();
-        //P1OUT ^= 0x01;          // Toggle BOTH LEDs (Red goes off, Green comes on)
-       				 __delay_cycles(10000); // Wait 1 FULL SECOND
+int main(void)
+{
+    WDTCTL = WDTPW | WDTHOLD; // Stop watchdog timer
+    // P1DIR |= 0x01;              // Set P1.0 (Red) AND P1.6 (Green) to output
+    // P1OUT |= 0x01;              // Turn RED ON to start
+    led_init();
+    while (1) {
+        led_toggle();
+        // P1OUT ^= 0x01;          // Toggle BOTH LEDs (Red goes off, Green comes on)
+        __delay_cycles(10000); // Wait 1 FULL SECOND
     }
 }
